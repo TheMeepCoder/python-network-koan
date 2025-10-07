@@ -39,16 +39,16 @@ def parse_log_entry(log_line):
     }
 
 first_log = parse_log_entry(network_logs[0])
-assert first_log["device"] == __, "Fix this: what device generated the first log?"
-assert first_log["level"] == __, "Fix this: what is the log level?"
-assert first_log["message"] == __, "Fix this: what is the log message?"
+assert first_log["device"] == "CORE-SW-01", "Fix this: what device generated the first log?"
+assert first_log["level"] == "INFO", "Fix this: what is the log level?"
+assert first_log["message"] == "Port Gi0/1 is UP", "Fix this: what is the log message?"
 
 # Parse all logs
 def parse_all_logs(log_list):
     return [parse_log_entry(log) for log in log_list]
 
 parsed_logs = parse_all_logs(network_logs)
-assert len(parsed_logs) == __, "Fix this: how many logs were parsed?"
+assert len(parsed_logs) == 7, "Fix this: how many logs were parsed?"
 
 # Filter logs by severity level
 def filter_by_level(logs, level):
@@ -59,17 +59,17 @@ def filter_by_level(logs, level):
     return result
 
 errors = filter_by_level(parsed_logs, "ERROR")
-assert len(errors) == __, "Fix this: how many ERROR logs?"
+assert len(errors) == 3, "Fix this: how many ERROR logs?"
 
 warnings = filter_by_level(parsed_logs, "WARNING")
-assert len(warnings) == __, "Fix this: how many WARNING logs?"
+assert len(warnings) == 2, "Fix this: how many WARNING logs?"
 
 # Find logs for a specific device
 def get_device_logs(logs, device_name):
     return [log for log in logs if log["device"] == device_name]
 
 core_switch_logs = get_device_logs(parsed_logs, "CORE-SW-01")
-assert len(core_switch_logs) == __, "Fix this: how many logs from CORE-SW-01?"
+assert len(core_switch_logs) == 3, "Fix this: how many logs from CORE-SW-01?"
 
 # Count logs by device
 def count_logs_by_device(logs):
@@ -80,7 +80,7 @@ def count_logs_by_device(logs):
     return counts
 
 device_log_counts = count_logs_by_device(parsed_logs)
-assert device_log_counts["DIST-SW-01"] == __, "Fix this: how many logs from DIST-SW-01?"
+assert device_log_counts["DIST-SW-01"] == 2, "Fix this: how many logs from DIST-SW-01?"
 
 # Detect critical issues
 def detect_critical_issues(logs):
@@ -95,7 +95,7 @@ def detect_critical_issues(logs):
     return critical
 
 critical_issues = detect_critical_issues(parsed_logs)
-assert len(critical_issues) == __, "Fix this: how many critical issues?"
+assert len(critical_issues) == 3, "Fix this: how many critical issues?"
 
 # Network performance metrics
 performance_data = [
